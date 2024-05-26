@@ -1,0 +1,307 @@
+<div class="container-fluid w-100 h-100 px-3">
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100 h-100">
+
+      <!-- Number Column -->
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef (click)="sortData($event)">
+          <div class="d-flex align-center">
+            Number
+            @if(sortCol().number) {
+              <mat-icon>arrow_drop_down</mat-icon>
+            }
+          </div>
+      </th>
+        <td mat-cell *matCellDef="let pokemon">#{{ pokemon.number }}</td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef (click)="sortData($event)">
+          <div class="d-flex align-center">
+            Name
+            @if(sortCol().name) {
+              <mat-icon>arrow_drop_down</mat-icon>
+            }
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let pokemon">{{ pokemon.name }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="type_1">
+        <th mat-header-cell *matHeaderCellDef>Type 1</th>
+        <td mat-cell *matCellDef="let pokemon">{{ pokemon.type_1 | convertTypeToValue}}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="type_2">
+        <th mat-header-cell *matHeaderCellDef >Type 2</th>
+        <td mat-cell *matCellDef="let pokemon">{{ pokemon.type_2 | convertTypeToValue}}</td>
+      </ng-container>
+  
+      <!-- HP Column -->
+      <ng-container matColumnDef="hp" >
+        <th mat-header-cell *matHeaderCellDef (click)="sortData($event)">
+          <div class="d-flex align-center">
+            HP
+            @if(sortCol().hp) {
+              <mat-icon>arrow_drop_down</mat-icon>
+            }
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let pokemon">{{ pokemon.hp }}</td>
+      </ng-container>
+  
+      <!-- Attack Column -->
+      <ng-container matColumnDef="attack">
+        <th mat-header-cell *matHeaderCellDef (click)="sortData($event)">
+          <div class="d-flex align-center">
+            Attack
+            @if(sortCol().attack) {
+              <mat-icon>arrow_drop_down</mat-icon>
+            }
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let pokemon">{{ pokemon.attack }}</td>
+      </ng-container>
+  
+      <!-- Defense Column -->
+      <ng-container matColumnDef="defense">
+        <th mat-header-cell *matHeaderCellDef (click)="sortData($event)">
+          <div class="d-flex align-center">
+            Defense
+            @if(sortCol().defense) {
+              <mat-icon>arrow_drop_down</mat-icon>
+            }
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let pokemon">{{ pokemon.defense }}</td>
+      </ng-container>
+  <!-- Sp. Atk Column -->
+  <ng-container matColumnDef="sp_atk">
+    <th mat-header-cell *matHeaderCellDef (click)="sortData($event)">
+      <div class="d-flex align-center">
+        Sp. Atk
+        @if(sortCol().sp_atk) {
+          <mat-icon>arrow_drop_down</mat-icon>
+        }
+      </div>
+    </th>
+    <td mat-cell *matCellDef="let pokemon">{{ pokemon.sp_atk }}</td>
+  </ng-container>
+  
+  <!-- Sp. Def Column -->
+  <ng-container matColumnDef="sp_def">
+    <th mat-header-cell *matHeaderCellDef (click)="sortData($event)">
+    <div class="d-flex align-center">
+      Sp. Def
+      @if(sortCol().sp_def) {
+        <mat-icon>arrow_drop_down</mat-icon>
+      }
+    </div>
+  </th>
+    <td mat-cell *matCellDef="let pokemon">{{ pokemon.sp_def }}</td>
+  </ng-container>
+  
+  <!-- Speed Column -->
+  <ng-container matColumnDef="speed">
+    <th mat-header-cell *matHeaderCellDef (click)="sortData($event)">
+      <div class="d-flex align-center">
+        Speed
+        @if(sortCol().speed) {
+          <mat-icon>arrow_drop_down</mat-icon>
+        }
+      </div>
+    </th>
+    <td mat-cell *matCellDef="let pokemon">{{ pokemon.speed }}</td>
+  </ng-container>
+  
+  <!-- Generation Column -->
+  <ng-container matColumnDef="generation">
+    <th mat-header-cell *matHeaderCellDef (click)="sortData($event)">
+      <div class="d-flex align-center">
+        Generation
+        @if(sortCol().generation) {
+          <mat-icon>arrow_drop_down</mat-icon>
+        }
+      </div>
+    </th>
+    <td mat-cell *matCellDef="let pokemon">{{ pokemon.generation }}</td>
+  </ng-container>
+  
+  <!-- Legendary Column -->
+  <ng-container matColumnDef="legendary">
+    <th mat-header-cell *matHeaderCellDef (click)="sortData($event)">
+      <div class="d-flex align-center">
+        Legendary
+        @if(sortCol().legendary) {
+          <mat-icon>arrow_drop_down</mat-icon>
+        }
+      </div>
+    </th>
+    <td mat-cell *matCellDef="let pokemon">{{ pokemon.legendary }}</td>
+  </ng-container>
+  <ng-container matColumnDef="total">
+    <th mat-header-cell *matHeaderCellDef (click)="sortData($event)">
+      <div class="d-flex align-center">
+        Total
+        @if(sortCol().total) {
+          <mat-icon>arrow_drop_down</mat-icon>
+        }
+      </div>
+    </th>
+    <td mat-cell *matCellDef="let pokemon">{{ pokemon.total }}</td>
+  </ng-container>
+  
+  <!-- Filter -->
+  <form  [formGroup]="filterForm">
+  <ng-container matColumnDef="numberFilter">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">
+      <!-- <mat-form-field >
+        <input matInput formControlName="id" type="number" [readonly]="true">
+      </mat-form-field> -->
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="nameFilter" >
+    <th mat-header-cell *matHeaderCellDef  [attr.colspan]="1">
+      <mat-form-field >
+        <mat-label>Filter Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="typeFilter">
+    <th mat-header-cell *matHeaderCellDef  [attr.colspan]="2">
+      <mat-select #type value="" formControlName="pokemonType">
+      <mat-option [value]="''" >Default</mat-option>
+      @for(type of pokemonTypes; track type.id) {
+        <mat-option [value]="type.id">{{ type.name }}</mat-option>
+      }
+    </mat-select>
+  </th>
+  </ng-container>
+  <ng-container matColumnDef="hpFilter"> 
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">
+      <div class="row w-100">
+      <mat-form-field class="col-6">
+        <mat-label>Min</mat-label>
+        <input matInput formControlName="min_hp" type="number">
+      </mat-form-field>
+      <mat-form-field class="col-6">
+        <mat-label>Max</mat-label>
+        <input matInput formControlName="max_hp" type="number">
+      </mat-form-field>
+      </div>
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="attackFilter">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">
+     <div class="row w-100">
+      <mat-form-field class="col-6">
+        <mat-label>Min</mat-label>
+        <input matInput formControlName="min_attack" type="number">
+      </mat-form-field>
+      <mat-form-field class="col-6">
+        <mat-label>Max</mat-label>
+        <input matInput formControlName="max_attack" type="number">
+      </mat-form-field>
+     </div>
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="defenseFilter">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">
+      <div class="row w-100">
+        <mat-form-field class="col-6">
+          <mat-label>Min</mat-label>
+          <input matInput formControlName="min_defense" type="number">
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <mat-label>Max</mat-label>
+          <input matInput formControlName="max_defense" type="number">
+        </mat-form-field>
+       </div>
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="spAtkFilter">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">
+      <div class="row w-100">
+        <mat-form-field class="col-6">
+          <mat-label>Min</mat-label>
+          <input matInput formControlName="min_spAtk" type="number">
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <mat-label>Max</mat-label>
+          <input matInput formControlName="max_spAtk" type="number">
+        </mat-form-field>
+       </div>
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="spDefFilter">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">
+      <div class="row w-100">
+        <mat-form-field class="col-6">
+          <mat-label>Min</mat-label>
+          <input matInput formControlName="min_spDef" type="number">
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <mat-label>Max</mat-label>
+          <input matInput formControlName="max_spDef" type="number">
+        </mat-form-field>
+       </div>
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="speedFilter">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">
+      <div class="row w-100">
+      <mat-form-field class="col-6">
+        <mat-label>Min</mat-label>
+        <input matInput formControlName="min_speed" type="number">
+      </mat-form-field>
+      <mat-form-field class="col-6">
+        <mat-label>Max</mat-label>
+        <input matInput formControlName="max_speed" type="number">
+      </mat-form-field>
+      </div>
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="generationFilter">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">
+      <mat-form-field >
+        <input matInput formControlName="generation" type="number">
+      </mat-form-field>
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="legendaryFilter">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">
+      <mat-form-field >
+        <input matInput formControlName="legendary" type="number">
+      </mat-form-field>
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="totalFilter">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">
+      <div class="row">
+        <mat-form-field class="col-6">
+          <mat-label>Min</mat-label>
+          <input matInput formControlName="min_total" type="number">
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <mat-label>Max</mat-label>
+          <input matInput formControlName="max_total" type="number">
+        </mat-form-field>
+      </div>
+    </th>
+  </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-header-row *matHeaderRowDef="filterColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
+    </form>
+    </table>
+  </div>
+  <mat-paginator class="paginator" 
+    [length]="totalItems" 
+    [pageSize]="filters.pageSize" 
+    [pageSizeOptions]="pageSizeOptions" 
+    (page)="pageChanged($event)"
+    [showFirstLastButtons]="true"></mat-paginator>
+  
+</div>

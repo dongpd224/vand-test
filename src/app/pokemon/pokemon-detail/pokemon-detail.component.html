@@ -1,0 +1,30 @@
+@if (pokemonData) {
+  <h2 mat-dialog-title>{{ pokemonData.name }}</h2>
+<mat-dialog-content>
+  <div class="row">
+    <div class="col-4">
+      @defer (on immediate) {
+        <img [src]="imgUrl" width="100%" height="100%" alt="{{ pokemonData.name }}" class="img-fluid" />
+      }
+    </div>
+    <div class="col-8 row">
+      <div class="col-6">
+        <p>Number: {{ pokemonData.number }}</p>
+        <p>HP: {{ pokemonData.hp }}</p>
+        <p>Type1: {{ pokemonData.type_1 | convertTypeToValue}}</p>
+        <p>Type2: {{ pokemonData.type_2 | convertTypeToValue}}</p>
+        <p>Attack: {{ pokemonData.attack }}</p>
+        <p>Defense: {{ pokemonData.defense }}</p>
+      </div>
+      <div class="col-6">
+        <p>Attack: {{ pokemonData.sp_atk }}</p>
+        <p>Defense: {{ pokemonData.sp_def }}</p>
+        <p>Attack: {{ pokemonData.speed }}</p>
+        <p>Defense: {{ pokemonData.generation }}</p>
+        <p>Attack: {{ pokemonData.legendary }}</p>
+      </div>
+    </div>
+  </div>
+  
+</mat-dialog-content>
+}
