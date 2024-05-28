@@ -17,8 +17,8 @@
   margin-top: 18px
 }
 .table-container{
-  width: 100%;
-  height: calc(100% - 74px);
+  max-width: 100%;
+  max-height: calc(100% - 74px);
   overflow-x: auto;
   overflow-y: auto;
 }
